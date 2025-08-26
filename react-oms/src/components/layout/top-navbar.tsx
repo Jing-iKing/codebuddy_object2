@@ -53,8 +53,12 @@ export function TopNavbar() {
     },
     {
       title: '装载管理',
-      href: '/loading',
+      href: '/loading/pallet-loading',
       icon: <Truck className="h-5 w-5" />,
+      submenu: [
+        { title: '码板装车', href: '/loading/pallet-loading' },
+        { title: '车次管理', href: '/loading/vehicle-management' },
+      ],
     },
     {
       title: '订单管理',

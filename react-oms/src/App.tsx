@@ -16,7 +16,8 @@ const OrderDetail = lazy(() => import('./pages/orders/order-detail'))
 const CustomersPage = lazy(() => import('./pages/customers'))
 const AddressesPage = lazy(() => import('./pages/addresses'))
 const StrategiesPage = lazy(() => import('./pages/strategies'))
-const LoadingPage = lazy(() => import('./pages/loading'))
+const PalletLoadingPage = lazy(() => import('./pages/loading/pallet-loading'))
+const VehicleManagementPage = lazy(() => import('./pages/loading/vehicle-management'))
 const TransitAreasPage = lazy(() => import('./pages/transit/areas'))
 const TransitProcessingPage = lazy(() => import('./pages/transit/processing'))
 const NodesPage = lazy(() => import('./pages/nodes'))
@@ -63,7 +64,8 @@ function App() {
           <Route path="customers" element={<CustomersPage />} />
           <Route path="addresses" element={<AddressesPage />} />
           <Route path="strategies" element={<StrategiesPage />} />
-          <Route path="loading" element={<LoadingPage />} />
+          <Route path="loading/pallet-loading" element={<PalletLoadingPage />} />
+          <Route path="loading/vehicle-management" element={<VehicleManagementPage />} />
           <Route path="transit/areas" element={<TransitAreasPage />} />
           <Route path="transit/processing" element={<TransitProcessingPage />} />
           <Route path="nodes" element={<NodesPage />} />

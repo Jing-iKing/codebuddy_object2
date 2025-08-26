@@ -56,89 +56,8 @@ import {
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 
-// 模拟中转区域数据
-const transitAreas = [
-  {
-    id: "AREA-001",
-    name: "上海中转中心",
-    code: "SH-TC",
-    defaultStrategy: "标准配送策略",
-    address: "上海市浦东新区航都路18号",
-    contactName: "张经理",
-    contactPhone: "13800138000",
-    status: "运行中"
-  },
-  {
-    id: "AREA-002",
-    name: "北京中转站",
-    code: "BJ-TS",
-    defaultStrategy: "加急配送策略",
-    address: "北京市顺义区空港物流园区",
-    contactName: "李主管",
-    contactPhone: "13900139000",
-    status: "运行中"
-  },
-  {
-    id: "AREA-003",
-    name: "广州南沙中转区",
-    code: "GZ-NS",
-    defaultStrategy: "标准配送策略",
-    address: "广州市南沙区港前大道南沙物流中心",
-    contactName: "陈经理",
-    contactPhone: "13700137000",
-    status: "运行中"
-  },
-  {
-    id: "AREA-004",
-    name: "深圳前海物流中心",
-    code: "SZ-QH",
-    defaultStrategy: "冷链配送策略",
-    address: "深圳市前海合作区前湾一路1号",
-    contactName: "黄主管",
-    contactPhone: "13600136000",
-    status: "维护中"
-  },
-  {
-    id: "AREA-005",
-    name: "杭州西部中转站",
-    code: "HZ-WS",
-    defaultStrategy: "大件配送策略",
-    address: "杭州市余杭区良渚街道杭州西部物流中心",
-    contactName: "朱经理",
-    contactPhone: "13500135000",
-    status: "运行中"
-  },
-  {
-    id: "AREA-006",
-    name: "成都东部物流园",
-    code: "CD-EP",
-    defaultStrategy: "标准配送策略",
-    address: "成都市龙泉驿区车城东七路88号",
-    contactName: "杨主管",
-    contactPhone: "13400134000",
-    status: "运行中"
-  },
-  {
-    id: "AREA-007",
-    name: "武汉空港中转区",
-    code: "WH-AP",
-    defaultStrategy: "加急配送策略",
-    address: "武汉市东西湖区金山大道特8号",
-    contactName: "胡经理",
-    contactPhone: "13300133000",
-    status: "暂停"
-  },
-  {
-    id: "AREA-008",
-    name: "南京江北物流中心",
-    code: "NJ-JB",
-    defaultStrategy: "标准配送策略",
-    address: "南京市江北新区浦滨路150号",
-    contactName: "董主管",
-    contactPhone: "13200132000",
-    status: "运行中"
-  }
-]
+import { mockTransitAreas } from "@/data/mock/transit-areas";
+import { TransitArea } from "@/types/transit";
 
 const getStatusBadge = (status: string) => {
   switch (status) {
@@ -158,20 +77,23 @@ export default function TransitAreasPage() {
   const [searchTerm, setSearchTerm] = useState("")
   const [currentPage, setCurrentPage] = useState(1)
   const [isDialogOpen, setIsDialogOpen] = useState(false)
-  const [newArea, setNewArea] = useState({
+  const [newArea, setNewArea] = useState<Partial<TransitArea>>({
     name: "",
     code: "",
     defaultStrategy: "",
     address: "",
     contactName: "",
     contactPhone: "",
-    status: "运行中"
+    status: "运行中",
+    isCommon: true,
+    color: "text-primary",
+    iconName: "Building"
   })
   
   const areasPerPage = 5
 
   // 过滤和分页逻辑
-  const filteredAreas = transitAreas.filter(area => 
+  const filteredAreas = mockTransitAreas.filter(area => 
     area.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
     area.code.toLowerCase().includes(searchTerm.toLowerCase()) ||
     area.address.toLowerCase().includes(searchTerm.toLowerCase())
@@ -355,7 +277,7 @@ export default function TransitAreasPage() {
           </div>
           <div className="flex items-center space-x-2">
             <ExportImportButtons 
-              data={transitAreas}
+              data={mockTransitAreas}
               exportFileName="中转区域数据"
               exportPermission="data:export"
               importPermission="data:import"
@@ -424,7 +346,7 @@ export default function TransitAreasPage() {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {currentAreas.map((area) => (
+              {currentAreas.map((area: TransitArea) => (
                 <TableRow key={area.id}>
                   <TableCell>
                     <div className="flex items-center gap-2">
