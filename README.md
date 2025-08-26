@@ -1,4 +1,4 @@
-# CodeBuddy Object2 - React OMS系统
+# OMS系统
 
 这是一个基于React的订单管理系统(OMS)，专注于仓储物流管理，特别是码板装车功能的优化实现。
 
